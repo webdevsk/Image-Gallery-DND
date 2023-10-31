@@ -14,7 +14,7 @@ const Gallery = () => {
   const [marked, setMarked] = useState([])
   return (
     <>
-      <div className="rounded-xl border bg-gray-100 shadow-md">
+      <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
         {/* title portion */}
         <div className="flex min-h-[2.5rem] items-center border-b px-4">
           <div>
