@@ -1,9 +1,16 @@
-import { Transition } from "@headlessui/react"
-import { useState } from "react"
-import { HiOutlineStar } from "react-icons/hi2"
+import { Switch, Transition } from "@headlessui/react"
+import { memo, useState } from "react"
+import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2"
 
-const Image = (props) => {
-  const { image, className, featured, ...filteredProps } = props
+const Image = memo((props) => {
+  const {
+    image,
+    className,
+    featured,
+    isMarked,
+    handleMarked,
+    ...filteredProps
+  } = props
   const [isHovered, setIsHovered] = useState(false)
 
   //Cleaner code
@@ -13,7 +20,6 @@ const Image = (props) => {
     featured ? "col-span-2 row-span-2" : "",
   ].join(" ")
 
-  console.log(containerClasses)
   return (
     <div
       {...filteredProps}
@@ -28,7 +34,7 @@ const Image = (props) => {
       />
 
       <Transition
-        show={isHovered}
+        show={isHovered || isMarked}
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
         enterTo="opacity-100"
@@ -36,19 +42,39 @@ const Image = (props) => {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className="overlay absolute inset-0 grid grid-flow-col place-content-between p-1 xl:p-2">
+        <div
+          className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2 ${
+            isMarked ? " backdrop-brightness-105 backdrop-contrast-75" : ""
+          }`}
+        >
           <div>
-            {!featured && (
-              <button className="rounded-full bg-white fill-none text-xl text-yellow-400 transition-colors hover:fill-current">
+            {!featured && isHovered && (
+              <button className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current">
                 <HiOutlineStar className="fill-inherit" />
               </button>
             )}
           </div>
-          <div>{/* checkbox */}</div>
+          <div>
+            <Switch
+              checked={isMarked}
+              onChange={(bool) => handleMarked(image.id, bool)}
+              name={image.id}
+              className={`${
+                isMarked ? "" : ""
+              } text-accent grid place-items-center rounded-full border bg-white text-2xl`}
+            >
+              <span className="sr-only">Mark Image file for deletion</span>
+              <HiMiniCheckCircle
+                className={`fill-current ${
+                  isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
+                }`}
+              />
+            </Switch>
+          </div>
         </div>
       </Transition>
     </div>
   )
-}
-
+})
+Image.displayName = "Image"
 export default Image
