@@ -31,9 +31,14 @@ const Gallery = () => {
         </div>
 
         {/* body portion */}
-        <div className="grid grid-cols-5 gap-2 p-4">
+        <div className="grid grid-cols-5 gap-3 p-4">
           {imageFiles.map((img) => (
-            <Image key={img.id} image={img} featured={img.id === "image1"} />
+            <Image
+              key={img.id}
+              image={img}
+              featured={img.id === "image1"}
+              className="heh"
+            />
           ))}
         </div>
       </div>
