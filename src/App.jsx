@@ -13,6 +13,9 @@ const App = () => {
                 <h5>Marked</h5>
                 <h6>Marked</h6>
                 <p>Marked</p>
+                <span>Marked</span>
+                <a>Marked</a>
+                <small>Marked</small>
               </div>
             </div>
           </div>
