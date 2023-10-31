@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]
       },
+      // Change variable colors easily inside index.css@6
       colors: {
         background: 'var(--background-color)',
         card: 'var(--card-color)',
