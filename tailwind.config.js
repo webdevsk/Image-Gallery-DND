@@ -18,12 +18,14 @@ export default {
       },
       // Change variable colors easily inside index.css@6
       colors: {
-        background: 'var(--background-color)',
-        card: 'var(--card-color)',
-        body: 'var(--body-color)',
-        accent: 'var(--accent-color)',
-        link: 'var(--link-color)',
+        'background': 'var(--background-color)',
+        'card': 'var(--card-color)',
+        'body': 'var(--body-color)',
+        'accent': 'var(--accent-color)',
+        'link': 'var(--link-color)',
         'link-hover': 'var(--link-hover-color)',
+        'danger': 'var(--danger-color)',
+        'danger-hover': 'var(--danger-hover-color)',
       }
     },
   },
