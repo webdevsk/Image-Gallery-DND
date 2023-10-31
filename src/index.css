@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background-color: theme(colors.zinc.50);
+  --card-color: theme(colors.gray.100);
+  --body-color: theme(colors.black);
+  --accent-color: theme(colors.blue.500);
+  --link-color: theme(colors.blue.700);
+  --link-hover-color: theme(colors.blue.700 / 10%);
+}
+
+@layer base {
+  body {
+    @apply bg-zinc-50 antialiased;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold xl:text-4xl;
+  }
+  h2 {
+    @apply text-2xl font-semibold xl:text-3xl;
+  }
+  h3 {
+    @apply text-xl font-semibold xl:text-2xl;
+  }
+  h4 {
+    @apply text-lg font-bold xl:text-xl;
+  }
+  h5 {
+    @apply text-base font-bold xl:text-lg;
+  }
+  h6 {
+    @apply text-sm font-bold xl:text-base;
+  }
+  p {
+    @apply text-sm xl:text-base;
+  }
+}
