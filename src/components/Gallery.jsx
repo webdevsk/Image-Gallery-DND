@@ -1,4 +1,14 @@
 import { useState } from "react"
+import Image from "./Image"
+
+const imageFiles = Array.from({ length: 11 }).map((_, i) => {
+  const c = i + 1
+  return {
+    id: `image${c}`,
+    src: `/images/image-${c}.${c < 10 ? "webp" : "jpeg"}`,
+  }
+})
+console.log(imageFiles)
 
 const Gallery = () => {
   const [marked, setMarked] = useState([])
@@ -18,6 +28,13 @@ const Gallery = () => {
               </button>
             )}
           </div>
+        </div>
+
+        {/* body portion */}
+        <div className="grid grid-cols-5 gap-2 p-4">
+          {imageFiles.map((img) => (
+            <Image key={img.id} image={img} featured={img.id === "image1"} />
+          ))}
         </div>
       </div>
     </>
