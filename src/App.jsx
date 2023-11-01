@@ -1,3 +1,4 @@
+import { DndContext } from "@dnd-kit/core"
 import Gallery from "./components/Gallery"
 
 const App = () => {

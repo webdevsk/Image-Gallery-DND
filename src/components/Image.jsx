@@ -1,3 +1,5 @@
+import { useDraggable, useDroppable } from "@dnd-kit/core"
+import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
 import { memo, useState } from "react"
 import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2"
@@ -13,19 +15,30 @@ const Image = memo((props) => {
   } = props
   const [isHovered, setIsHovered] = useState(false)
 
+  const { active, attribues, listeners, setNodeRef, transform } = useDraggable({
+    id: image.id,
+  })
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  }
   //Cleaner code
   const containerClasses = [
     "relative overflow-hidden rounded-lg border bg-white",
     className ?? "",
     featured ? "col-span-2 row-span-2" : "",
+    active ? "z-10" : "",
   ].join(" ")
 
   return (
     <div
       {...filteredProps}
       className={containerClasses}
-      onMouseOver={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseOver={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
+      ref={setNodeRef}
+      style={style}
+      {...attribues}
+      {...listeners}
     >
       <img
         className="aspect-square w-full object-contain"
@@ -33,7 +46,7 @@ const Image = memo((props) => {
         alt={image?.id}
       />
 
-      <Transition
+      {/* <Transition
         show={isHovered || isMarked}
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
@@ -72,7 +85,7 @@ const Image = memo((props) => {
             </Switch>
           </div>
         </div>
-      </Transition>
+      </Transition> */}
     </div>
   )
 })
