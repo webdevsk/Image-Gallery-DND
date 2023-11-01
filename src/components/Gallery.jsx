@@ -1,13 +1,22 @@
 import { useState } from "react"
 import Image from "./Image"
 
-const generatedImages = Array.from({ length: 11 }).map((_, i) => {
-  const c = i + 1
-  return {
-    id: c,
-    src: `/images/image-${c}.${c < 10 ? "webp" : "jpeg"}`,
-  }
-})
+// Slower method
+// const generatedImages = Array.from({ length: 11 }).map((_, i) => {
+//   const c = i + 1
+//   return {
+//     id: c,
+//     src: `/images/image-${c}.${c < 10 ? "webp" : "jpeg"}`,
+//   }
+// })
+
+const generatedImages = []
+for (let i = 1; i < 12; i++) {
+  generatedImages.push({
+    id: i,
+    src: `/images/image-${i}.${i < 10 ? "webp" : "jpeg"}`,
+  })
+}
 
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
@@ -39,7 +48,7 @@ const Gallery = () => {
             {!!marked.length && (
               <button
                 onClick={handleDelete}
-                className="text-danger hover:text-danger-hover font-semibold"
+                className="font-semibold text-danger hover:text-danger-hover"
               >
                 <small>Delete files</small>
               </button>
