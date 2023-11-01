@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Image from "./Image"
-import { DndContext, useDroppable } from "@dnd-kit/core"
+import { DndContext, closestCenter, useDroppable } from "@dnd-kit/core"
+import { SortableContext } from "@dnd-kit/sortable"
 
 // Slower method
 // const generatedImages = Array.from({ length: 11 }).map((_, i) => {
@@ -59,50 +60,50 @@ const Gallery = () => {
   }
   return (
     <>
-      <DndContext onDragEnd={handleDragOver}>
-        <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
-          {/* title portion */}
-          <div className="flex min-h-[2.5rem] items-center border-b px-4">
-            <div>
-              {!marked.length && <h5>Image Gallery</h5>}
-              {!!marked.length && <h6>{marked.length} files selected</h6>}
+      <DndContext onDragEnd={handleDragOver} collisionDetection={closestCenter}>
+        <SortableContext items={imageFiles}>
+          <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
+            {/* title portion */}
+            <div className="flex min-h-[2.5rem] items-center border-b px-4">
+              <div>
+                {!marked.length && <h5>Image Gallery</h5>}
+                {!!marked.length && <h6>{marked.length} files selected</h6>}
+              </div>
+              <div className="ms-auto">
+                {!!marked.length && (
+                  <button
+                    onClick={handleDelete}
+                    className="font-semibold text-danger hover:text-danger-hover"
+                  >
+                    <small>Delete files</small>
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="ms-auto">
-              {!!marked.length && (
-                <button
-                  onClick={handleDelete}
-                  className="font-semibold text-danger hover:text-danger-hover"
-                >
-                  <small>Delete files</small>
-                </button>
-              )}
-            </div>
-          </div>
 
-          {/* body portion */}
-          <div
-            // ref={setNodeRef}
-            className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 `}
-          >
-            {imageFiles.map((img) => (
-              <Droppable key={img.id} id={img.id}>
+            {/* body portion */}
+            <div
+              // ref={setNodeRef}
+              className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 `}
+            >
+              {imageFiles.map((img) => (
                 <Image
-                  // key={img.id}
+                  key={img.id}
                   image={img}
-                  featured={img.id === 1}
+                  // featured={img.id === 1}
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                 />
-              </Droppable>
-            ))}
-
-            {!imageFiles.length && (
-              <h3 className="col-span-full select-none text-center text-gray-400">
-                No images available
-              </h3>
-            )}
+              ))}
+              {/*  */}
+              {!imageFiles.length && (
+                <h3 className="col-span-full select-none text-center text-gray-400">
+                  No images available
+                </h3>
+              )}
+            </div>
           </div>
-        </div>
+        </SortableContext>
       </DndContext>
     </>
   )

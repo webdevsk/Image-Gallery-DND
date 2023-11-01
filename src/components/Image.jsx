@@ -1,4 +1,5 @@
 import { useDraggable, useDroppable } from "@dnd-kit/core"
+import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
 import { memo, useState } from "react"
@@ -15,18 +16,20 @@ const Image = memo((props) => {
   } = props
   const [isHovered, setIsHovered] = useState(false)
 
-  const { active, attribues, listeners, setNodeRef, transform } = useDraggable({
-    id: image.id,
-  })
+  const { active, attribues, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: image.id,
+    })
   const style = {
     transform: CSS.Translate.toString(transform),
+    transition,
   }
   //Cleaner code
   const containerClasses = [
     "relative overflow-hidden rounded-lg border bg-white",
     className ?? "",
     featured ? "col-span-2 row-span-2" : "",
-    active ? "z-10" : "",
+    // active ? "z-10" : "",
   ].join(" ")
 
   return (
