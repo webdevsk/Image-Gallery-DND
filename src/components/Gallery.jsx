@@ -1,11 +1,8 @@
-import { forwardRef, useState } from "react"
+import { useState } from "react"
 import Image from "./Image"
 import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core"
-import { SortableContext } from "@dnd-kit/sortable"
-import {
-  restrictToParentElement,
-  restrictToWindowEdges,
-} from "@dnd-kit/modifiers"
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable"
+import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 
 // Slower method
 // const generatedImages = Array.from({ length: 11 }).map((_, i) => {
@@ -28,7 +25,6 @@ const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
   const [marked, setMarked] = useState([])
   const [activeElm, setActiveElm] = useState(null)
-
   const handleMarked = (id, bool) => {
     if (bool) {
       setMarked([...marked, id])
@@ -47,12 +43,8 @@ const Gallery = () => {
     setActiveElm(imageFiles.find((img) => img.id === data.active.id))
   }
 
-  const handleDragOver = (data) => {
-    console.log(data)
-  }
-
   const handleDragEnd = (data) => {
-    console.log(data)
+    // console.log(data)
     const { active, over, ...rest } = data
     if (!over) return
     if (active.id === over.id) return
@@ -74,33 +66,32 @@ const Gallery = () => {
   }
   return (
     <>
-      <DndContext
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-        collisionDetection={closestCenter}
-      >
-        <SortableContext items={imageFiles}>
-          <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
-            {/* title portion */}
-            <div className="flex min-h-[2.5rem] items-center border-b px-4">
-              <div>
-                {!marked.length && <h5>Image Gallery</h5>}
-                {!!marked.length && <h6>{marked.length} files selected</h6>}
-              </div>
-              <div className="ms-auto">
-                {!!marked.length && (
-                  <button
-                    onClick={handleDelete}
-                    className="font-semibold text-danger hover:text-danger-hover"
-                  >
-                    <small>Delete files</small>
-                  </button>
-                )}
-              </div>
-            </div>
+      <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
+        {/* title portion */}
+        <div className="flex min-h-[2.5rem] items-center border-b px-4">
+          <div>
+            {!marked.length && <h5>Image Gallery</h5>}
+            {!!marked.length && <h6>{marked.length} files selected</h6>}
+          </div>
+          <div className="ms-auto">
+            {!!marked.length && (
+              <button
+                onClick={handleDelete}
+                className="font-semibold text-danger hover:text-danger-hover"
+              >
+                <small>Delete files</small>
+              </button>
+            )}
+          </div>
+        </div>
 
-            {/* body portion */}
+        {/* body portion */}
+        <DndContext
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          collisionDetection={closestCenter}
+        >
+          <SortableContext items={imageFiles} strategy={rectSortingStrategy}>
             <div
               className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 `}
             >
@@ -115,12 +106,12 @@ const Gallery = () => {
                 />
               ))}
 
-              {/* fake element to show on drag */}
+              {/* abstract element to show on drag */}
               <DragOverlay
+                adjustScale={true}
                 modifiers={[restrictToWindowEdges]}
                 zIndex={10}
-                adjustScale={true}
-                className="overflow-hidden rounded-lg border bg-white shadow-xl"
+                className="overflow-hidden rounded-lg border bg-white shadow-lg"
               >
                 {!!activeElm && (
                   <img
@@ -138,9 +129,9 @@ const Gallery = () => {
                 </h3>
               )}
             </div>
-          </div>
-        </SortableContext>
-      </DndContext>
+          </SortableContext>
+        </DndContext>
+      </div>
     </>
   )
 }
