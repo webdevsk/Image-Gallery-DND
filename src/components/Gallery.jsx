@@ -4,6 +4,7 @@ import {
   DndContext,
   DragOverlay,
   KeyboardSensor,
+  MeasuringStrategy,
   MouseSensor,
   PointerSensor,
   TouchSensor,
@@ -91,9 +92,11 @@ const Gallery = () => {
     setActiveElm(null)
   }
 
+  const handleDragCancel = () => setActiveElm(null)
+
   return (
     <>
-      <div className="mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
+      <div className="relative mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
         {/* title portion */}
         <Title marked={marked} handleDelete={handleDelete} />
 
@@ -102,7 +105,13 @@ const Gallery = () => {
           sensors={sensors}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
+          onDragCancel={handleDragCancel}
           collisionDetection={closestCenter}
+          measuring={{
+            droppable: {
+              strategy: MeasuringStrategy.Always,
+            },
+          }}
         >
           <SortableContext items={imageFiles} strategy={rectSortingStrategy}>
             <div
@@ -125,7 +134,7 @@ const Gallery = () => {
                 adjustScale={true}
                 modifiers={[restrictToWindowEdges]}
                 zIndex={10}
-                className="cursor-grabbing overflow-hidden rounded-lg border bg-white shadow-lg"
+                className="cursor-grabbing overflow-hidden rounded-lg border bg-white shadow-md"
               >
                 {!!activeElm && (
                   <img
@@ -153,7 +162,7 @@ const Gallery = () => {
 export default Gallery
 const Title = ({ marked, handleDelete }) => {
   return (
-    <div className="flex min-h-[2.5rem] items-center overflow-hidden border-b px-4">
+    <div className="sticky top-0 z-20 flex min-h-[2.5rem] items-center overflow-hidden border-b bg-gray-50 px-4">
       <div>
         {!marked.length && <h5>Image Gallery</h5>}
         {!!marked.length && <h6>{marked.length} files selected</h6>}

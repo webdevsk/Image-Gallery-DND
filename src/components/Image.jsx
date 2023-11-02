@@ -1,4 +1,4 @@
-import { useSortable } from "@dnd-kit/sortable"
+import { defaultAnimateLayoutChanges, useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
 import { memo, useState } from "react"
@@ -16,10 +16,25 @@ const Image = memo((props) => {
   } = props
   const [isHovered, setIsHovered] = useState(false)
 
-  const { active, attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: image.id,
-    })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: image.id,
+    transition: {
+      duration: 300,
+      easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+    },
+    animateLayoutChanges: (args) =>
+      defaultAnimateLayoutChanges({
+        ...args,
+        wasDragging: true,
+      }),
+  })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -32,7 +47,9 @@ const Image = memo((props) => {
   const containerClasses = [
     "cursor-grab",
     className ?? "",
-    active && image.id === active.id ? "[&>*]:opacity-30" : "",
+    isDragging
+      ? "[&>*]:opacity-30 [&>*]:brightness-75 shadow-inner shadow-md"
+      : "",
     featured ? "col-span-2 row-span-2" : "",
   ]
     .join(" ")
@@ -50,7 +67,7 @@ const Image = memo((props) => {
       style={style}
     >
       <img
-        className="aspect-square w-full object-contain"
+        className="aspect-square w-full select-none object-contain"
         src={image?.src}
         alt={image?.id}
       />
@@ -61,7 +78,7 @@ const Image = memo((props) => {
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="transition-opacity duration-75"
+        leave="transition-opacity duration-0"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
@@ -74,7 +91,10 @@ const Image = memo((props) => {
             {!featured && isHovered && (
               <button
                 className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
-                onClick={() => handleFeatured(image.id)}
+                onClick={() => {
+                  setIsHovered(false)
+                  handleFeatured(image.id)
+                }}
               >
                 <HiOutlineStar className="fill-inherit" />
               </button>
