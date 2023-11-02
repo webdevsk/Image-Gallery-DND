@@ -47,9 +47,7 @@ const Image = memo((props) => {
   const containerClasses = [
     "cursor-grab",
     className ?? "",
-    isDragging
-      ? "[&>*]:opacity-30 [&>*]:brightness-75 shadow-inner shadow-md"
-      : "",
+    isDragging ? "[&>*]:opacity-30 [&>*]:brightness-75 shadow-inner" : "",
     featured ? "col-span-2 row-span-2" : "",
   ]
     .join(" ")
