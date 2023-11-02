@@ -11,7 +11,7 @@ const generatedImages = []
 for (let i = 1; i < 12; i++) {
     generatedImages.push({
         id: i,
-        src: `/images/image-${i}.${i < 10 ? "webp" : "jpeg"}`,
+        src: `./images/image-${i}.${i < 10 ? "webp" : "jpeg"}`,
     })
 }
 
