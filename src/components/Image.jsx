@@ -1,4 +1,3 @@
-import { useDraggable, useDroppable } from "@dnd-kit/core"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
@@ -25,16 +24,17 @@ const Image = memo((props) => {
     transform: CSS.Transform.toString(transform),
     transition: transition,
     transformOrigin: "0 0",
+    touchAction: "none",
   }
 
   return (
     <div
       {...filteredProps}
-      className={` cursor-grab ${className ?? ""} ${
+      className={`cursor-grab ${className ?? ""} ${
         active && image.id === active.id ? "[&>*]:opacity-30" : ""
       } ${featured ? "col-span-2 row-span-2" : ""}`}
-      // onMouseOver={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -46,7 +46,7 @@ const Image = memo((props) => {
         alt={image?.id}
       />
 
-      {/* <Transition
+      <Transition
         show={isHovered || isMarked}
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
@@ -74,7 +74,7 @@ const Image = memo((props) => {
               name={image.id}
               className={`${
                 isMarked ? "" : ""
-              } text-accent grid place-items-center rounded-full border bg-white text-2xl`}
+              } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
             >
               <span className="sr-only">Mark Image file for deletion</span>
               <HiMiniCheckCircle
@@ -85,7 +85,7 @@ const Image = memo((props) => {
             </Switch>
           </div>
         </div>
-      </Transition> */}
+      </Transition>
     </div>
   )
 })

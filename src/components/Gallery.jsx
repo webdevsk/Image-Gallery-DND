@@ -1,7 +1,21 @@
 import { useState } from "react"
 import Image from "./Image"
-import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core"
-import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable"
+import {
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  MouseSensor,
+  PointerSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core"
+import {
+  SortableContext,
+  rectSortingStrategy,
+  sortableKeyboardCoordinates,
+} from "@dnd-kit/sortable"
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 
 // Slower method
@@ -25,6 +39,21 @@ const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
   const [marked, setMarked] = useState([])
   const [activeElm, setActiveElm] = useState(null)
+
+  // functions
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 10 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 250, tolerance: 5 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  )
+
   const handleMarked = (id, bool) => {
     if (bool) {
       setMarked([...marked, id])
@@ -64,6 +93,7 @@ const Gallery = () => {
     })
     setActiveElm(null)
   }
+
   return (
     <>
       <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
@@ -87,6 +117,7 @@ const Gallery = () => {
 
         {/* body portion */}
         <DndContext
+          sensors={sensors}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           collisionDetection={closestCenter}
@@ -111,7 +142,7 @@ const Gallery = () => {
                 adjustScale={true}
                 modifiers={[restrictToWindowEdges]}
                 zIndex={10}
-                className="overflow-hidden rounded-lg border bg-white shadow-lg"
+                className="cursor-grabbing overflow-hidden rounded-lg border bg-white shadow-lg"
               >
                 {!!activeElm && (
                   <img
