@@ -15,32 +15,33 @@ const Image = memo((props) => {
     ...filteredProps
   } = props
   const [isHovered, setIsHovered] = useState(false)
-
-  const { active, attribues, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: image.id,
-    })
+  const {
+    active,
+    attributes,
+    listeners,
+    getNewIndex,
+    activeIndex,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({
+    id: image.id,
+  })
   const style = {
     transform: CSS.Translate.toString(transform),
-    transition,
+    transition: transition,
   }
-  //Cleaner code
-  const containerClasses = [
-    "relative overflow-hidden rounded-lg border bg-white",
-    className ?? "",
-    featured ? "col-span-2 row-span-2" : "",
-    // active ? "z-10" : "",
-  ].join(" ")
-
   return (
     <div
       {...filteredProps}
-      className={containerClasses}
+      className={`${className ?? ""} ${
+        active && image.id === active.id ? "opacity-30 shadow-inner" : ""
+      } ${featured ? "col-span-2 row-span-2" : ""}`}
       // onMouseOver={() => setIsHovered(true)}
       // onMouseLeave={() => setIsHovered(false)}
       ref={setNodeRef}
       style={style}
-      {...attribues}
+      {...attributes}
       {...listeners}
     >
       <img

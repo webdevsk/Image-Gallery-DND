@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { forwardRef, useState } from "react"
 import Image from "./Image"
-import { DndContext, closestCenter, useDroppable } from "@dnd-kit/core"
+import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
+import {
+  restrictToParentElement,
+  restrictToWindowEdges,
+} from "@dnd-kit/modifiers"
 
 // Slower method
 // const generatedImages = Array.from({ length: 11 }).map((_, i) => {
@@ -23,7 +27,7 @@ for (let i = 1; i < 12; i++) {
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
   const [marked, setMarked] = useState([])
-  console.log(imageFiles)
+  const [activeElm, setActiveElm] = useState(null)
 
   const handleMarked = (id, bool) => {
     if (bool) {
@@ -39,9 +43,18 @@ const Gallery = () => {
     setMarked([])
   }
 
+  const handleDragStart = (data) => {
+    setActiveElm(imageFiles.find((img) => img.id === data.active.id))
+  }
+
   const handleDragOver = (data) => {
     console.log(data)
+  }
+
+  const handleDragEnd = (data) => {
+    console.log(data)
     const { active, over, ...rest } = data
+    if (!over) return
     if (active.id === over.id) return
 
     setImageFiles((imageFiles) => {
@@ -57,10 +70,16 @@ const Gallery = () => {
           activeObj,
         )
     })
+    setActiveElm(null)
   }
   return (
     <>
-      <DndContext onDragEnd={handleDragOver} collisionDetection={closestCenter}>
+      <DndContext
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
+        collisionDetection={closestCenter}
+      >
         <SortableContext items={imageFiles}>
           <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
             {/* title portion */}
@@ -83,19 +102,36 @@ const Gallery = () => {
 
             {/* body portion */}
             <div
-              // ref={setNodeRef}
               className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 `}
             >
-              {imageFiles.map((img) => (
+              {imageFiles.map((img, i) => (
                 <Image
                   key={img.id}
                   image={img}
-                  // featured={img.id === 1}
+                  featured={i === 0}
+                  className="relative overflow-hidden rounded-lg border bg-white"
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                 />
               ))}
-              {/*  */}
+
+              {/* fake element to show on drag */}
+              <DragOverlay
+                modifiers={[restrictToWindowEdges]}
+                zIndex={10}
+                adjustScale={true}
+                className="overflow-hidden rounded-lg border bg-white shadow-xl"
+              >
+                {!!activeElm && (
+                  <img
+                    className="aspect-square w-full object-contain"
+                    src={activeElm.src}
+                    alt={activeElm.id}
+                  />
+                )}
+              </DragOverlay>
+
+              {/* when there is no image */}
               {!imageFiles.length && (
                 <h3 className="col-span-full select-none text-center text-gray-400">
                   No images available
@@ -110,15 +146,3 @@ const Gallery = () => {
 }
 
 export default Gallery
-
-const Droppable = (props) => {
-  const { setNodeRef, isOver } = useDroppable({ id: props.id })
-  return (
-    <div
-      ref={setNodeRef}
-      className={`${isOver ? "bg-red-400" : "bg-gray-200"} rounded-lg`}
-    >
-      {props.children}
-    </div>
-  )
-}
