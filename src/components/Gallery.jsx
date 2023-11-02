@@ -162,7 +162,7 @@ const Gallery = () => {
 export default Gallery
 const Title = ({ marked, handleDelete }) => {
   return (
-    <div className="sticky top-0 z-20 flex min-h-[2.5rem] items-center overflow-hidden border-b bg-gray-50 px-4">
+    <div className="sticky top-0 z-20 flex min-h-[2.5rem] items-center overflow-hidden border-b bg-gray-100 px-4">
       <div>
         {!marked.length && <h5>Image Gallery</h5>}
         {!!marked.length && <h6>{marked.length} files selected</h6>}
