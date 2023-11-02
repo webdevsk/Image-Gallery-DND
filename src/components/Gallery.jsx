@@ -17,23 +17,8 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable"
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
-
-// Slower method
-// const generatedImages = Array.from({ length: 11 }).map((_, i) => {
-//   const c = i + 1
-//   return {
-//     id: c,
-//     src: `/images/image-${c}.${c < 10 ? "webp" : "jpeg"}`,
-//   }
-// })
-
-const generatedImages = []
-for (let i = 1; i < 12; i++) {
-  generatedImages.push({
-    id: i,
-    src: `/images/image-${i}.${i < 10 ? "webp" : "jpeg"}`,
-  })
-}
+import generatedImages from "../assets/generatedImages"
+import { Transition } from "@headlessui/react"
 
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
@@ -53,6 +38,18 @@ const Gallery = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   )
+
+  const handleFeatured = (id) => {
+    setImageFiles((imageFiles) => {
+      const elm = imageFiles.find((img) => img.id === id)
+      return imageFiles
+        .toSpliced(
+          imageFiles.findIndex((img) => img.id === id),
+          1,
+        )
+        .toSpliced(0, 0, elm)
+    })
+  }
 
   const handleMarked = (id, bool) => {
     if (bool) {
@@ -96,24 +93,9 @@ const Gallery = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-[56rem] rounded-xl border bg-gray-100 shadow-md">
+      <div className="mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
         {/* title portion */}
-        <div className="flex min-h-[2.5rem] items-center border-b px-4">
-          <div>
-            {!marked.length && <h5>Image Gallery</h5>}
-            {!!marked.length && <h6>{marked.length} files selected</h6>}
-          </div>
-          <div className="ms-auto">
-            {!!marked.length && (
-              <button
-                onClick={handleDelete}
-                className="font-semibold text-danger hover:text-danger-hover"
-              >
-                <small>Delete files</small>
-              </button>
-            )}
-          </div>
-        </div>
+        <Title marked={marked} handleDelete={handleDelete} />
 
         {/* body portion */}
         <DndContext
@@ -134,6 +116,7 @@ const Gallery = () => {
                   className="relative overflow-hidden rounded-lg border bg-white"
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
+                  handleFeatured={handleFeatured}
                 />
               ))}
 
@@ -168,3 +151,31 @@ const Gallery = () => {
 }
 
 export default Gallery
+const Title = ({ marked, handleDelete }) => {
+  return (
+    <div className="flex min-h-[2.5rem] items-center overflow-hidden border-b px-4">
+      <div>
+        {!marked.length && <h5>Image Gallery</h5>}
+        {!!marked.length && <h6>{marked.length} files selected</h6>}
+      </div>
+      <div className="ms-auto">
+        <Transition
+          show={!!marked.length}
+          enter="transition transform duration-75"
+          enterFrom="opacity-0 translate-y-full"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition transform duration-75 "
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-full"
+        >
+          <button
+            onClick={handleDelete}
+            className="font-semibold text-danger hover:text-danger-hover"
+          >
+            <small>Delete files</small>
+          </button>
+        </Transition>
+      </div>
+    </div>
+  )
+}

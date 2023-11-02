@@ -11,7 +11,8 @@ const Image = memo((props) => {
     featured,
     isMarked,
     handleMarked,
-    ...filteredProps
+    handleFeatured,
+    ...sanitizedProps
   } = props
   const [isHovered, setIsHovered] = useState(false)
 
@@ -27,18 +28,26 @@ const Image = memo((props) => {
     touchAction: "none",
   }
 
+  // Cleaner approach
+  const containerClasses = [
+    "cursor-grab",
+    className ?? "",
+    active && image.id === active.id ? "[&>*]:opacity-30" : "",
+    featured ? "col-span-2 row-span-2" : "",
+  ]
+    .join(" ")
+    .trim()
+
   return (
     <div
-      {...filteredProps}
-      className={`cursor-grab ${className ?? ""} ${
-        active && image.id === active.id ? "[&>*]:opacity-30" : ""
-      } ${featured ? "col-span-2 row-span-2" : ""}`}
+      {...sanitizedProps}
+      {...attributes}
+      {...listeners}
+      className={containerClasses}
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
     >
       <img
         className="aspect-square w-full object-contain"
@@ -46,6 +55,7 @@ const Image = memo((props) => {
         alt={image?.id}
       />
 
+      {/* Overlay for buttons */}
       <Transition
         show={isHovered || isMarked}
         enter="transition-opacity duration-75"
@@ -57,12 +67,15 @@ const Image = memo((props) => {
       >
         <div
           className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2 ${
-            isMarked ? " backdrop-brightness-105 backdrop-contrast-75" : ""
+            isMarked ? "backdrop-brightness-105 backdrop-contrast-75" : ""
           }`}
         >
           <div>
             {!featured && isHovered && (
-              <button className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current">
+              <button
+                className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
+                onClick={() => handleFeatured(image.id)}
+              >
                 <HiOutlineStar className="fill-inherit" />
               </button>
             )}
