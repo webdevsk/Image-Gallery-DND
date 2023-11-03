@@ -61,6 +61,14 @@ const Gallery = () => {
     }
   }
 
+  const handleMarkAll = () => {
+    setMarked(imageFiles.map((img) => img.id))
+  }
+
+  const handleUnmarkAll = () => {
+    setMarked([])
+  }
+
   const handleDelete = () => {
     if (!marked.length) return
     setImageFiles(imageFiles.filter((img) => !marked.includes(img.id)))
@@ -99,7 +107,12 @@ const Gallery = () => {
     <>
       <div className="relative mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
         {/* title portion */}
-        <Title marked={marked} handleDelete={handleDelete} />
+        <Title
+          marked={marked}
+          handleMarkAll={handleMarkAll}
+          handleUnmarkAll={handleUnmarkAll}
+          handleDelete={handleDelete}
+        />
 
         {/* body portion */}
         <DndContext
