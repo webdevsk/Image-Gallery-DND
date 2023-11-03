@@ -1,6 +1,7 @@
 <!-- Replace these using search repo_name, project_title, short_description, project_description, view_demo_link -->
 <!-- Prepend a hash # to filter active ones -->
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
@@ -21,22 +22,24 @@
   <a href="https://github.com/webdevsk/#repo_name">
     <img src="github_assets/logo.png" alt="Logo" width="100" height="100">
   </a>
-
+<!-- <a href="https://www.flaticon.com/free-icons/gallery" title="gallery icons">Gallery icons created by manshagraphics - Flaticon</a> -->
 <h3 align="center">#project_title</h3>
 
   <p align="center">
     #short_description
     <br />
 
-  [**Explore the docs »**](https://github.com/webdevsk/#repo_name)
+[**Explore the docs »**](https://github.com/webdevsk/#repo_name)
 
-  [View Demo](#view_demo_link)
-  · [Report Bug](https://github.com/webdevsk/#repo_name/issues)
-  · [Request Feature](https://github.com/webdevsk/#repo_name/issues)
+[View Demo](#view_demo_link)
+· [Report Bug](https://github.com/webdevsk/#repo_name/issues)
+· [Request Feature](https://github.com/webdevsk/#repo_name/issues)
+
   </p>
 </div>
 
 ---
+
 <!-- TABLE OF CONTENTS -->
 <details>
 <summary>Table of Contents</summary>
@@ -56,6 +59,7 @@
 <br/>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <div align="center">
@@ -74,11 +78,12 @@
 [![React][React]][React-url]  
 [![React-router][React-router]][React-router-url]  
 [![TailwindCSS][TailwindCSS]][Tailwind-url]  
-[![MUI][MUI]][MUI-url]  
+[![MUI][MUI]][MUI-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 🌐 The site is already live at: [#view_demo_link](#view_demo_link)
@@ -100,32 +105,32 @@ OR
 ### Installation
 
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
+
 1. Clone the repo
 
-    ```sh
-    git clone https://github.com/webdevsk/#repo_name.git
-    ```
+   ```sh
+   git clone https://github.com/webdevsk/#repo_name.git
+   ```
 
 1. Install NPM packages
 
-    ```sh
-    npm install
-    ```
-  
+   ```sh
+   npm install
+   ```
+
 1. Fill in a `.env.local` file following the patterns of `envSample.txt`
 
 1. Run Dev server
 
-    ```js
-    npm run dev
-    ```
+   ```js
+   npm run dev
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
+
 ## Features
-
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,6 +147,7 @@ See the [open issues](https://github.com/webdevsk/repo_name/issues) for a full l
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -158,6 +164,7 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -165,6 +172,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
+
 ## Contact
 
 [![Follow on GitHub][GitHub]](https://github.com/webdevsk)
@@ -187,6 +195,7 @@ Project Link: [https://github.com/webdevsk/#repo_name](https://github.com/webdev
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [Linkedin-url]: https://linkedin.com/in/webdevsk
 [GitHub]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
 [Linkedin]: https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white

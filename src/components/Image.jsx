@@ -5,6 +5,7 @@ import { memo, useState } from "react"
 import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2"
 
 const Image = memo((props) => {
+  const [isHovered, setIsHovered] = useState(false)
   const {
     image,
     className,
@@ -14,7 +15,6 @@ const Image = memo((props) => {
     handleFeatured,
     ...sanitizedProps
   } = props
-  const [isHovered, setIsHovered] = useState(false)
 
   const {
     attributes,
@@ -29,6 +29,7 @@ const Image = memo((props) => {
       duration: 300,
       easing: "cubic-bezier(0.25, 1, 0.5, 1)",
     },
+    // Required to animate when sorted by other means except dragging
     animateLayoutChanges: (args) =>
       defaultAnimateLayoutChanges({
         ...args,
@@ -40,6 +41,7 @@ const Image = memo((props) => {
     transform: CSS.Transform.toString(transform),
     transition: transition,
     transformOrigin: "0 0",
+    // Required for mobile devices to prevent scroll while trying to drag
     touchAction: "none",
   }
 
@@ -65,7 +67,9 @@ const Image = memo((props) => {
       style={style}
     >
       <img
-        className="aspect-square w-full select-none object-contain"
+        className={`aspect-square w-full object-contain transition-transform duration-300 ${
+          isHovered && !isDragging ? "scale-105" : ""
+        }`}
         src={image?.src}
         alt={image?.id}
       />
@@ -81,8 +85,8 @@ const Image = memo((props) => {
         leaveTo="opacity-0"
       >
         <div
-          className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2 ${
-            isMarked ? "backdrop-brightness-105 backdrop-contrast-75" : ""
+          className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
+            isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
           }`}
         >
           <div>
