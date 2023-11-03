@@ -19,7 +19,8 @@ import {
 } from "@dnd-kit/sortable"
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 import generatedImages from "../assets/generatedImages"
-import { Transition } from "@headlessui/react"
+import AddNewImage from "./AddNewImage"
+import Title from "./Title"
 
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
@@ -122,14 +123,14 @@ const Gallery = () => {
                   key={img.id}
                   image={img}
                   featured={i === 0}
-                  className="relative overflow-hidden rounded-lg border bg-white"
+                  className="relative overflow-hidden rounded-lg border-2 bg-white"
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                   handleFeatured={handleFeatured}
                 />
               ))}
 
-              {/* abstract element to show on drag */}
+              {/* floating abstract element to show on drag */}
               <DragOverlay
                 adjustScale={true}
                 modifiers={[restrictToWindowEdges]}
@@ -147,10 +148,15 @@ const Gallery = () => {
 
               {/* when there is no image */}
               {!imageFiles.length && (
-                <h3 className="col-span-full select-none text-center text-gray-400">
+                <h3 className="grid aspect-square w-full place-items-center rounded-lg p-4 text-center">
                   No images available
                 </h3>
               )}
+
+              <AddNewImage
+                className={!imageFiles.length ? "" : ""}
+                setImageFiles={setImageFiles}
+              />
             </div>
           </SortableContext>
         </DndContext>
@@ -160,31 +166,3 @@ const Gallery = () => {
 }
 
 export default Gallery
-const Title = ({ marked, handleDelete }) => {
-  return (
-    <div className="sticky top-0 z-[1] flex min-h-[2.5rem] items-center overflow-hidden border-b bg-gray-100 px-4">
-      <div>
-        {!marked.length && <h5>Image Gallery</h5>}
-        {!!marked.length && <h6>{marked.length} files selected</h6>}
-      </div>
-      <div className="ms-auto">
-        <Transition
-          show={!!marked.length}
-          enter="transition transform duration-75"
-          enterFrom="opacity-0 translate-y-full"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition transform duration-75 "
-          leaveFrom="opacity-100 translate-y-0"
-          leaveTo="opacity-0 translate-y-full"
-        >
-          <button
-            onClick={handleDelete}
-            className="font-semibold text-danger hover:text-danger-hover"
-          >
-            <small>Delete files</small>
-          </button>
-        </Transition>
-      </div>
-    </div>
-  )
-}
