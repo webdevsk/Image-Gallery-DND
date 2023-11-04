@@ -3,7 +3,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
 import { memo, useState } from "react"
 import { HiOutlineStar } from "react-icons/hi2"
-import { IoCheckmarkCircleSharp } from "react-icons/io5"
+import { IoCheckmarkCircleSharp, IoExpand } from "react-icons/io5"
 
 const Image = memo((props) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -14,6 +14,7 @@ const Image = memo((props) => {
     isMarked,
     handleMarked,
     handleFeatured,
+    setImgBoxElm,
     ...sanitizedProps
   } = props
 
@@ -86,39 +87,52 @@ const Image = memo((props) => {
         leaveTo="opacity-0"
       >
         <div
-          className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
+          className={`overlay absolute inset-0 grid grid-cols-[repeat(2,_max-content)] place-content-between p-2  ${
             isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
           }`}
         >
+          {/* Featured */}
           <div>
             {!featured && isHovered && (
               <button
-                className="rounded-full border-2 border-transparent bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
+                className="rounded-full border-2 border-transparent bg-white fill-none text-2xl text-yellow-400 opacity-70 transition-colors hover:fill-current hover:opacity-100"
                 onClick={() => {
                   setIsHovered(false)
                   handleFeatured(image.id)
                 }}
+                title="Set as featured image"
               >
                 <HiOutlineStar className="fill-inherit" />
               </button>
             )}
           </div>
+
+          {/* Mark */}
           <div>
             <Switch
+              title={isMarked ? "Unmark item" : "Mark item"}
               checked={isMarked}
               onChange={(bool) => handleMarked(image.id, bool)}
               name={image.id}
               className={`${
                 isMarked ? "" : ""
-              } grid place-items-center rounded-full border-2 bg-white text-2xl text-accent`}
+              } grid place-items-center rounded-full border-2 bg-white text-2xl text-accent opacity-70 hover:opacity-100`}
             >
-              <span className="sr-only">Mark Image file for deletion</span>
-              <IoCheckmarkCircleSharp
-                className={`fill-current ${
-                  isMarked ? "opacity-100" : "opacity-50 hover:opacity-80"
-                }`}
-              />
+              <span className="sr-only">Mark item</span>
+              <IoCheckmarkCircleSharp className={`fill-current`} />
             </Switch>
+          </div>
+
+          <div></div>
+          {/* Imagebox */}
+          <div>
+            <button
+              className={`grid place-items-center rounded-full bg-white text-2xl text-body opacity-70 hover:opacity-100`}
+              onClick={() => setImgBoxElm(image)}
+              title="Expand image"
+            >
+              <IoExpand className="p-0.5" />
+            </button>
           </div>
         </div>
       </Transition>

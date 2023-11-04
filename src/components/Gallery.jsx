@@ -22,12 +22,15 @@ import generatedImages from "../assets/generatedImages"
 import AddNewImage from "./AddNewImage"
 import GalleryTitle from "./GalleryTitle"
 import GalleryFooter from "./GalleryFooter"
+import ImageBox from "./ImageBox"
 
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
   const [marked, setMarked] = useState([])
+  // for drag overlay
   const [activeElm, setActiveElm] = useState(null)
-
+  // for image box
+  const [imgBoxElm, setImgBoxElm] = useState(null)
   // handler functions
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
@@ -116,13 +119,6 @@ const Gallery = () => {
             },
           }}
         >
-          {/* when there are no images */}
-          {/* {!imageFiles.length && (
-            <h3 className="select-none px-4 py-8 text-center text-gray-500">
-              No images available
-            </h3>
-          )} */}
-
           <SortableContext items={imageFiles} strategy={rectSortingStrategy}>
             <div
               className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 [&>*:not(.aspect-auto)]:aspect-square`}
@@ -136,6 +132,7 @@ const Gallery = () => {
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                   handleFeatured={handleFeatured}
+                  setImgBoxElm={setImgBoxElm}
                 />
               ))}
 
@@ -168,6 +165,8 @@ const Gallery = () => {
         {/* footer portion */}
         <GalleryFooter />
       </div>
+
+      <ImageBox imgBoxElm={imgBoxElm} setImgBoxElm={setImgBoxElm} />
     </>
   )
 }
