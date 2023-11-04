@@ -7,11 +7,16 @@
   --background-color: theme(colors.zinc.50);
   --card-color: theme(colors.gray.100);
   --body-color: theme(colors.gray.950);
+  --body-off-color: theme(colors.white);
   --accent-color: theme(colors.blue.500);
   --link-color: theme(colors.blue.700);
   --link-hover-color: theme(colors.blue.700 / 80%);
   --danger-color: theme(colors.red.600);
   --danger-hover-color: theme(colors.red.500);
+}
+
+::selection {
+  @apply text-body-off bg-accent;
 }
 
 @layer base {
@@ -45,7 +50,7 @@
     @apply text-xs xl:text-sm;
   }
   a {
-    @apply text-link hover:text-link-hover cursor-pointer text-sm font-semibold transition-colors duration-150 xl:text-base;
+    @apply cursor-pointer text-sm font-semibold text-link transition-colors duration-150 hover:text-link-hover xl:text-base;
   }
 }
 

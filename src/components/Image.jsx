@@ -2,7 +2,8 @@ import { defaultAnimateLayoutChanges, useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Switch, Transition } from "@headlessui/react"
 import { memo, useState } from "react"
-import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2"
+import { HiOutlineStar } from "react-icons/hi2"
+import { IoCheckmarkCircleSharp } from "react-icons/io5"
 
 const Image = memo((props) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -47,7 +48,7 @@ const Image = memo((props) => {
 
   // Cleaner approach
   const containerClasses = [
-    "cursor-grab",
+    "cursor-grab relative overflow-hidden flex items-center justify-center",
     className ?? "",
     isDragging ? "[&>*]:opacity-30 [&>*]:brightness-75 shadow-inner" : "",
     featured ? "col-span-2 row-span-2" : "",
@@ -67,7 +68,7 @@ const Image = memo((props) => {
       style={style}
     >
       <img
-        className={`aspect-square w-full object-contain transition-transform duration-300 ${
+        className={`object-contain transition-transform duration-300 ${
           isHovered && !isDragging ? "scale-105" : ""
         }`}
         src={image?.src}
@@ -92,7 +93,7 @@ const Image = memo((props) => {
           <div>
             {!featured && isHovered && (
               <button
-                className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
+                className="rounded-full border-2 border-transparent bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
                 onClick={() => {
                   setIsHovered(false)
                   handleFeatured(image.id)
@@ -109,12 +110,12 @@ const Image = memo((props) => {
               name={image.id}
               className={`${
                 isMarked ? "" : ""
-              } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
+              } grid place-items-center rounded-full border-2 bg-white text-2xl text-accent`}
             >
               <span className="sr-only">Mark Image file for deletion</span>
-              <HiMiniCheckCircle
+              <IoCheckmarkCircleSharp
                 className={`fill-current ${
-                  isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
+                  isMarked ? "opacity-100" : "opacity-50 hover:opacity-80"
                 }`}
               />
             </Switch>

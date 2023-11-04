@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react"
-import { HiMiniCheckCircle } from "react-icons/hi2"
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5"
 
 const Title = ({ marked, handleDelete, handleMarkAll, handleUnmarkAll }) => {
   return (
@@ -8,7 +8,7 @@ const Title = ({ marked, handleDelete, handleMarkAll, handleUnmarkAll }) => {
         {!marked.length && <h5>Image Gallery</h5>}
         {!!marked.length && (
           <h6>
-            <HiMiniCheckCircle className="-mt-1 me-1 inline-block text-2xl text-accent" />
+            <IoCheckmarkDoneCircleSharp className="-mt-1 me-1 inline-block text-2xl text-accent" />
             {marked.length} files selected
           </h6>
         )}

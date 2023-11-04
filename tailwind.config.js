@@ -21,6 +21,7 @@ export default {
         'background': 'var(--background-color)',
         'card': 'var(--card-color)',
         'body': 'var(--body-color)',
+        'body-off': 'var(--body-off-color)',
         'accent': 'var(--accent-color)',
         'link': 'var(--link-color)',
         'link-hover': 'var(--link-hover-color)',

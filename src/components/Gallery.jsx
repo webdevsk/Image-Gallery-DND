@@ -27,7 +27,7 @@ const Gallery = () => {
   const [marked, setMarked] = useState([])
   const [activeElm, setActiveElm] = useState(null)
 
-  // functions
+  // handler functions
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
     useSensor(MouseSensor, {
@@ -43,31 +43,21 @@ const Gallery = () => {
 
   const handleFeatured = (id) => {
     setImageFiles((imageFiles) => {
-      const elm = imageFiles.find((img) => img.id === id)
+      const activeFile = imageFiles.find((img) => img.id === id)
       return imageFiles
         .toSpliced(
           imageFiles.findIndex((img) => img.id === id),
           1,
         )
-        .toSpliced(0, 0, elm)
+        .toSpliced(0, 0, activeFile)
     })
   }
 
-  const handleMarked = (id, bool) => {
-    if (bool) {
-      setMarked([...marked, id])
-    } else {
-      setMarked(marked.filter((item) => item !== id))
-    }
-  }
+  const handleMarked = (id, bool) =>
+    setMarked(bool ? [...marked, id] : marked.filter((item) => item !== id))
 
-  const handleMarkAll = () => {
-    setMarked(imageFiles.map((img) => img.id))
-  }
-
-  const handleUnmarkAll = () => {
-    setMarked([])
-  }
+  const handleMarkAll = () => setMarked(imageFiles.map((img) => img.id))
+  const handleUnmarkAll = () => setMarked([])
 
   const handleDelete = () => {
     if (!marked.length) return
@@ -75,18 +65,16 @@ const Gallery = () => {
     setMarked([])
   }
 
-  const handleDragStart = (data) => {
+  const handleDragStart = (data) =>
     setActiveElm(imageFiles.find((img) => img.id === data.active.id))
-  }
 
   const handleDragEnd = (data) => {
-    // console.log(data)
-    const { active, over, ...rest } = data
+    const { active, over } = data
     if (!over) return
     if (active.id === over.id) return
 
     setImageFiles((imageFiles) => {
-      const activeObj = imageFiles.find((img) => img.id === active.id)
+      const activeFile = imageFiles.find((img) => img.id === active.id)
       return imageFiles
         .toSpliced(
           imageFiles.findIndex((img) => img.id === active.id),
@@ -95,7 +83,7 @@ const Gallery = () => {
         .toSpliced(
           imageFiles.findIndex((img) => img.id === over.id),
           0,
-          activeObj,
+          activeFile,
         )
     })
     setActiveElm(null)
@@ -127,16 +115,23 @@ const Gallery = () => {
             },
           }}
         >
+          {/* when there are no images */}
+          {/* {!imageFiles.length && (
+            <h3 className="select-none px-4 py-8 text-center text-gray-500">
+              No images available
+            </h3>
+          )} */}
+
           <SortableContext items={imageFiles} strategy={rectSortingStrategy}>
             <div
-              className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 `}
+              className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 [&>*:not(.aspect-auto)]:aspect-square`}
             >
               {imageFiles.map((img, i) => (
                 <Image
                   key={img.id}
                   image={img}
                   featured={i === 0}
-                  className="relative overflow-hidden rounded-lg border-2 bg-white"
+                  className="rounded-lg border-2 bg-white"
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                   handleFeatured={handleFeatured}
@@ -152,22 +147,17 @@ const Gallery = () => {
               >
                 {!!activeElm && (
                   <img
-                    className="aspect-square w-full object-contain"
+                    className="w-full object-contain"
                     src={activeElm.src}
                     alt={activeElm.id}
                   />
                 )}
               </DragOverlay>
 
-              {/* when there is no image */}
-              {!imageFiles.length && (
-                <h3 className="grid aspect-square w-full place-items-center rounded-lg p-4 text-center">
-                  No images available
-                </h3>
-              )}
-
               <AddNewImage
-                className={!imageFiles.length ? "" : ""}
+                className={
+                  !imageFiles.length ? "col-span-full mx-auto p-12" : ""
+                }
                 setImageFiles={setImageFiles}
               />
             </div>
