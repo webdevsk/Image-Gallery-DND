@@ -6,7 +6,7 @@ const GalleryFooter = () => {
       <div className="flex items-center gap-1 xl:gap-2">
         <small className="font-semibold">Project:</small>
         <a
-          href="https://www.flaticon.com/free-icons/gallery"
+          href="https://www.flaticon.com/free-icon/gallery_9853877"
           title="gallery icons"
           target="_blank"
           rel="noreferrer"

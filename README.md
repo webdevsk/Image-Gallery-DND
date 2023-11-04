@@ -19,21 +19,21 @@
 <br />
 
 <div align="center">
-  <a href="https://github.com/webdevsk/#repo_name">
+  <a href="https://www.flaticon.com/free-icon/gallery_9853877">
     <img src="github_assets/logo.png" alt="Logo" width="100" height="100">
   </a>
-<!-- <a href="https://www.flaticon.com/free-icons/gallery" title="gallery icons">Gallery icons created by manshagraphics - Flaticon</a> -->
-<h3 align="center">#project_title</h3>
+
+<h3 align="center">Image Gallery DND</h3>
 
   <p align="center">
-    #short_description
+    A beautiful Image Gallery with Drag and Drop feature
     <br />
 
-[**Explore the docs »**](https://github.com/webdevsk/#repo_name)
+[**Explore the docs »**](https://github.com/webdevsk/Image-Gallery-DND)
 
-[View Demo](#view_demo_link)
-· [Report Bug](https://github.com/webdevsk/#repo_name/issues)
-· [Request Feature](https://github.com/webdevsk/#repo_name/issues)
+[View Demo](https://webdevsk.github.io/Image-Gallery-DND/)
+· [Report Bug](https://github.com/webdevsk/Image-Gallery-DND/issues)
+· [Request Feature](https://github.com/webdevsk/Image-Gallery-DND/issues)
 
   </p>
 </div>
@@ -64,7 +64,7 @@
 
 <div align="center">
 
-[![Product snapshot](github_assets/snapshot.png)](#view_demo_link)
+[![Product snapshot](github_assets/snapshot.png)](https://webdevsk.github.io/Image-Gallery-DND/)
 
 </div>
 <br/>
@@ -86,7 +86,7 @@
 
 ## Getting Started
 
-🌐 The site is already live at: [#view_demo_link](#view_demo_link)
+🌐 The site is already live at: [https://webdevsk.github.io/Image-Gallery-DND/](https://webdevsk.github.io/Image-Gallery-DND/)
 
 OR
 
@@ -109,7 +109,7 @@ OR
 1. Clone the repo
 
    ```sh
-   git clone https://github.com/webdevsk/#repo_name.git
+   git clone https://github.com/webdevsk/Image-Gallery-DND.git
    ```
 
 1. Install NPM packages
@@ -178,7 +178,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [![Follow on GitHub][GitHub]](https://github.com/webdevsk)
 [![Follow on Linkedin][Linkedin]][Linkedin-url]
 
-Project Link: [https://github.com/webdevsk/#repo_name](https://github.com/webdevsk/#repo_name)
+Project Link: [https://github.com/webdevsk/Image-Gallery-DND](https://github.com/webdevsk/Image-Gallery-DND)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -199,16 +199,16 @@ Project Link: [https://github.com/webdevsk/#repo_name](https://github.com/webdev
 [Linkedin-url]: https://linkedin.com/in/webdevsk
 [GitHub]: https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white
 [Linkedin]: https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white
-[contributors-shield]: https://img.shields.io/github/contributors/webdevsk/#repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/webdevsk/#repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/webdevsk/#repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/webdevsk/#repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/webdevsk/#repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/webdevsk/#repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/webdevsk/#repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/webdevsk/#repo_name/issues
-[license-shield]: https://img.shields.io/github/license/webdevsk/#repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/webdevsk/#repo_name/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/webdevsk/Image-Gallery-DND.svg?style=for-the-badge
+[contributors-url]: https://github.com/webdevsk/Image-Gallery-DND/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/webdevsk/Image-Gallery-DND.svg?style=for-the-badge
+[forks-url]: https://github.com/webdevsk/Image-Gallery-DND/network/members
+[stars-shield]: https://img.shields.io/github/stars/webdevsk/Image-Gallery-DND.svg?style=for-the-badge
+[stars-url]: https://github.com/webdevsk/Image-Gallery-DND/stargazers
+[issues-shield]: https://img.shields.io/github/issues/webdevsk/Image-Gallery-DND.svg?style=for-the-badge
+[issues-url]: https://github.com/webdevsk/Image-Gallery-DND/issues
+[license-shield]: https://img.shields.io/github/license/webdevsk/Image-Gallery-DND.svg?style=for-the-badge
+[license-url]: https://github.com/webdevsk/Image-Gallery-DND/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [Next-url]: https://nextjs.org/
 [React]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
