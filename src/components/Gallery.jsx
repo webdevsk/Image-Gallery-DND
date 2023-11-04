@@ -20,7 +20,8 @@ import {
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 import generatedImages from "../assets/generatedImages"
 import AddNewImage from "./AddNewImage"
-import Title from "./Title"
+import GalleryTitle from "./GalleryTitle"
+import GalleryFooter from "./GalleryFooter"
 
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(generatedImages)
@@ -95,7 +96,7 @@ const Gallery = () => {
     <>
       <div className="relative mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
         {/* title portion */}
-        <Title
+        <GalleryTitle
           marked={marked}
           handleMarkAll={handleMarkAll}
           handleUnmarkAll={handleUnmarkAll}
@@ -163,6 +164,9 @@ const Gallery = () => {
             </div>
           </SortableContext>
         </DndContext>
+
+        {/* footer portion */}
+        <GalleryFooter />
       </div>
     </>
   )
