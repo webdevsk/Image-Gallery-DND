@@ -48,7 +48,7 @@ const AddNewImage = memo(({ className, setImageFiles }) => {
         className={`relative flex cursor-pointer flex-col place-items-center items-center justify-center gap-1 rounded-lg border-2 bg-gray-100 text-center text-gray-800 transition-colors hover:bg-gray-50 peer-disabled:opacity-50 ${className}`}
       >
         <HiPhoto className="inline text-xl" />
-        <small className="font-semibold">Add Images</small>
+        <small className="">Add Images</small>
         <div className="absolute inset-0 m-4 rounded-sm border border-dashed border-gray-400"></div>
       </label>
     </>

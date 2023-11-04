@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
-import { IoContract } from "react-icons/io5"
+import { IoContract, IoInformationCircleOutline } from "react-icons/io5"
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch"
 
 const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
   const handleClose = () => setImgBoxElm(null)
@@ -34,19 +35,30 @@ const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative w-full max-w-md transform overflow-hidden rounded-md bg-white p-4 shadow-xl transition-all">
-                  {(open) => (
-                    <>
-                      <button
-                        className="absolute bottom-6 right-6 ms-auto grid place-items-center rounded-full border-2 bg-white text-2xl opacity-60 hover:opacity-100"
-                        title="Close imagebox"
-                        onClick={handleClose}
-                      >
-                        <IoContract className="p-0.5" />
-                      </button>
-                      <img src={img?.src} className="rounded-md" alt="" />
-                    </>
-                  )}
+                <Dialog.Panel className="relative w-full max-w-md transform rounded-md bg-white p-4 shadow-xl transition-all">
+                  {/* react zoom pan pinch components */}
+                  <TransformWrapper>
+                    <TransformComponent>
+                      <img
+                        src={img?.src}
+                        className="cursor-grab rounded-md"
+                        alt=""
+                      />
+                    </TransformComponent>
+                  </TransformWrapper>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <small className=" text-gray-700">
+                      <IoInformationCircleOutline className="me-0.5 inline bg-white align-bottom text-base" />
+                      Use scrollwheel or pinch to zoom
+                    </small>
+                    <button
+                      className="ms-auto grid place-items-center rounded-full border-2 bg-white text-2xl opacity-60 hover:opacity-100"
+                      title="Close imagebox"
+                      onClick={handleClose}
+                    >
+                      <IoContract className="p-0.5" />
+                    </button>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

@@ -16,7 +16,7 @@
 }
 
 ::selection {
-  @apply text-body-off bg-accent;
+  @apply bg-accent text-body-off;
 }
 
 @layer base {
@@ -47,7 +47,7 @@
     @apply text-sm xl:text-base;
   }
   small {
-    @apply text-xs xl:text-sm;
+    @apply text-xs font-semibold xl:text-sm;
   }
   a {
     @apply cursor-pointer text-sm font-semibold text-link transition-colors duration-150 hover:text-link-hover xl:text-base;

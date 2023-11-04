@@ -26,10 +26,10 @@ const Title = ({ marked, handleDelete, handleMarkAll, handleUnmarkAll }) => {
           className="flex gap-2 xl:gap-4"
         >
           <button onClick={handleMarkAll}>
-            <small className="font-semibold hover:underline">Select All</small>
+            <small className=" hover:underline">Select All</small>
           </button>
           <button onClick={handleUnmarkAll}>
-            <small className="font-semibold hover:underline">Select None</small>
+            <small className=" hover:underline">Select None</small>
           </button>
           <button
             onClick={handleDelete}
