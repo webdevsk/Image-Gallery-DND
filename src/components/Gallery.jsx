@@ -99,6 +99,7 @@ const Gallery = () => {
         {/* title portion */}
         <GalleryTitle
           marked={marked}
+          imageFiles={imageFiles}
           handleMarkAll={handleMarkAll}
           handleUnmarkAll={handleUnmarkAll}
           handleDelete={handleDelete}
