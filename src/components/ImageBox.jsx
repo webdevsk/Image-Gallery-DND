@@ -35,9 +35,13 @@ const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative w-full max-w-md transform overflow-hidden rounded-md bg-white p-4 shadow-xl transition-all">
+                <Dialog.Panel className="relative max-h-[75dvh] w-full max-w-lg transform overflow-hidden rounded-md bg-white p-4 shadow-xl transition-all">
                   {/* react zoom pan pinch components */}
-                  <TransformWrapper>
+                  <TransformWrapper
+                    minScale={0.5}
+                    // centerOnInit={true}
+                    limitToBounds={false}
+                  >
                     <TransformComponent>
                       <img src={img?.src} alt="" />
                     </TransformComponent>

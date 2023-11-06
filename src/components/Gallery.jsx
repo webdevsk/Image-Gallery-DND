@@ -119,14 +119,14 @@ const Gallery = () => {
         >
           <SortableContext items={imageFiles} strategy={rectSortingStrategy}>
             <div
-              className={`grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-5 [&>*:not(.aspect-auto)]:aspect-square`}
+              className={`grid grid-cols-2 gap-1 p-4 sm:grid-cols-3 lg:grid-cols-5 [&>*:not(.aspect-auto)]:aspect-square`}
             >
               {imageFiles.map((img, i) => (
                 <Image
                   key={img.id}
                   image={img}
                   featured={i === 0}
-                  className="rounded-lg border-2 bg-white"
+                  className=" bg-white"
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                   handleFeatured={handleFeatured}
@@ -139,11 +139,11 @@ const Gallery = () => {
                 adjustScale={true}
                 modifiers={[restrictToWindowEdges]}
                 zIndex={10}
-                className="cursor-grabbing overflow-hidden rounded-lg border bg-white shadow-md"
+                className="cursor-grabbing overflow-hidden border bg-white shadow-md"
               >
                 {!!activeElm && (
                   <img
-                    className="w-full object-contain"
+                    className="h-full w-full object-cover"
                     src={activeElm.src}
                     alt={activeElm.id}
                   />

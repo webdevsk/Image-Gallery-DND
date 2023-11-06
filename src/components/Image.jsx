@@ -45,6 +45,7 @@ const Image = memo((props) => {
     transformOrigin: "0 0",
     // Required for mobile devices to prevent scroll while trying to drag
     touchAction: "none",
+    ...sanitizedProps.style,
   }
 
   // Cleaner approach
@@ -70,8 +71,9 @@ const Image = memo((props) => {
     >
       <img
         className={`h-full w-full object-cover transition-transform duration-300 ${
-          isHovered && !isDragging ? "scale-105" : ""
+          isHovered && !isDragging ? "sm:scale-105" : ""
         }`}
+        // mobile devices keep focus/hover state even after dragging. As the actual element differs from floating element, a sudden scale shift happens on drag end
         src={image?.src}
         alt={image?.id}
       />
