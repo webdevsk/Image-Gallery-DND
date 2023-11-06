@@ -34,9 +34,7 @@ const Gallery = () => {
   // handler functions
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
-    useSensor(MouseSensor, {
-      activationConstraint: { distance: 10 },
-    }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 10 } }),
     useSensor(TouchSensor, {
       activationConstraint: { delay: 250, tolerance: 5 },
     }),
