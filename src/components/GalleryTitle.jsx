@@ -17,7 +17,7 @@ const Title = ({
             <IoCheckmarkDone className=" me-2 inline align-text-bottom text-lg text-accent" />
             {marked.length}{" "}
             <span className="max-sm:hidden">
-              {marked.length > 1 ? "files" : "file"} selected
+              {marked.length > 1 ? "Files" : "File"} Selected
             </span>
           </h6>
         )}
@@ -58,7 +58,7 @@ const Title = ({
             onClick={handleDelete}
             className="font-semibold text-danger hover:text-danger-hover hover:underline"
           >
-            <small>Remove</small>
+            <small>Remove Item</small>
           </button>
         </Transition>
       </div>
