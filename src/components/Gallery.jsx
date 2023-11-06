@@ -165,6 +165,7 @@ const Gallery = () => {
         <GalleryFooter />
       </div>
 
+      {/* imagebox dialogue for bigger view. It portals to document-body by default */}
       <ImageBox imgBoxElm={imgBoxElm} setImgBoxElm={setImgBoxElm} />
     </>
   )

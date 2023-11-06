@@ -109,28 +109,32 @@ const Image = memo((props) => {
             )}
           </div>
 
-          {/* Mark */}
+          {/* Selection */}
           <div>
             <Switch
               title={isMarked ? "Unmark item" : "Mark item"}
               checked={isMarked}
               onChange={(bool) => handleMarked(image.id, bool)}
               name={image.id}
-              className={`${
-                isMarked ? "" : ""
-              } grid place-items-center rounded-full border-2 bg-white text-2xl text-accent opacity-70 hover:opacity-100`}
+              className={` grid place-items-center rounded-full border-2 bg-white text-2xl text-accent`}
             >
               <span className="sr-only">Mark item</span>
-              <IoCheckmarkCircleSharp className={`fill-current`} />
+              <IoCheckmarkCircleSharp
+                className={`fill-current transition-opacity ${
+                  isMarked ? "opacity-100" : "opacity-30 hover:opacity-70"
+                }`}
+              />
             </Switch>
           </div>
 
+          {/* Empty cell fillup */}
           <div></div>
+
           {/* Imagebox */}
           <div>
             {isHovered && (
               <button
-                className={`grid place-items-center rounded-full bg-white text-2xl text-body opacity-70 hover:opacity-100`}
+                className={`grid place-items-center rounded-full bg-white text-2xl text-body opacity-70 transition-opacity hover:opacity-100`}
                 onClick={() => setImgBoxElm(image)}
                 title="Expand image"
               >

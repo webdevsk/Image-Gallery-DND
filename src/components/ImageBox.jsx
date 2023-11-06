@@ -42,7 +42,7 @@ const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
                     centerOnInit={true}
                     // limitToBounds={false}
                   >
-                    <TransformComponent contentClass="" wrapperClass="w-full">
+                    <TransformComponent wrapperClass="w-full">
                       <img src={img?.src} alt="" />
                     </TransformComponent>
                   </TransformWrapper>
@@ -54,7 +54,7 @@ const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
                     </small>
                     <button
                       className="ms-auto grid place-items-center rounded-full border-2 bg-white text-2xl opacity-60 hover:opacity-100"
-                      title="Close imagebox"
+                      title="Close Imagebox"
                       onClick={handleClose}
                     >
                       <IoContract className="p-0.5" />
