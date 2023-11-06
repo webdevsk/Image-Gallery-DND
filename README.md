@@ -76,9 +76,7 @@
 ### Built With
 
 [![React][React]][React-url]  
-[![React-router][React-router]][React-router-url]  
-[![TailwindCSS][TailwindCSS]][Tailwind-url]  
-[![MUI][MUI]][MUI-url]
+[![TailwindCSS][TailwindCSS]][Tailwind-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

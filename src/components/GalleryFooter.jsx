@@ -26,7 +26,7 @@ const GalleryFooter = () => {
         </a>
       </div>
       <div className="flex items-center gap-2 max-sm:w-full sm:ms-auto">
-        <small className="  sm:ms-auto">Designer: Salman Khan</small>
+        <small className="  sm:ms-auto">Developed by: Salman Khan</small>
         <a
           href="https://github.com/webdevsk"
           target="_blank"

@@ -35,20 +35,16 @@ const ImageBox = ({ imgBoxElm: img, setImgBoxElm }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative w-full max-w-md transform rounded-md bg-white p-4 shadow-xl transition-all">
+                <Dialog.Panel className="relative w-full max-w-md transform overflow-hidden rounded-md bg-white p-4 shadow-xl transition-all">
                   {/* react zoom pan pinch components */}
                   <TransformWrapper>
                     <TransformComponent>
-                      <img
-                        src={img?.src}
-                        className="cursor-grab rounded-md"
-                        alt=""
-                      />
+                      <img src={img?.src} alt="" />
                     </TransformComponent>
                   </TransformWrapper>
                   <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <small className=" text-gray-700">
-                      <IoInformationCircleOutline className="me-0.5 inline bg-white align-bottom text-base" />
+                    <small className="text-gray-700 xl:text-xs">
+                      <IoInformationCircleOutline className="me-0.5 inline bg-white align-text-bottom text-base " />
                       Use scrollwheel or pinch to zoom
                     </small>
                     <button

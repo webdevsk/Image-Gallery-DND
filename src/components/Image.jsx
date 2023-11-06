@@ -69,7 +69,7 @@ const Image = memo((props) => {
       style={style}
     >
       <img
-        className={`object-contain transition-transform duration-300 ${
+        className={`h-full w-full object-cover transition-transform duration-300 ${
           isHovered && !isDragging ? "scale-105" : ""
         }`}
         src={image?.src}
@@ -126,13 +126,15 @@ const Image = memo((props) => {
           <div></div>
           {/* Imagebox */}
           <div>
-            <button
-              className={`grid place-items-center rounded-full bg-white text-2xl text-body opacity-70 hover:opacity-100`}
-              onClick={() => setImgBoxElm(image)}
-              title="Expand image"
-            >
-              <IoExpand className="p-0.5" />
-            </button>
+            {isHovered && (
+              <button
+                className={`grid place-items-center rounded-full bg-white text-2xl text-body opacity-70 hover:opacity-100`}
+                onClick={() => setImgBoxElm(image)}
+                title="Expand image"
+              >
+                <IoExpand className="p-0.5" />
+              </button>
+            )}
           </div>
         </div>
       </Transition>
