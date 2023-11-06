@@ -51,6 +51,14 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Features](#features)
+  - [Featured Image](#featured-image)
+  - [Hover Overlay](#hover-overlay)
+  - [Drag And Drop](#drag-and-drop)
+  - [Set Featured](#set-featured)
+  - [Selection](#selection)
+  - [Image Box/Expand Image](#image-boxexpand-image)
+  - [Zoom, Pan and Pinch](#zoom-pan-and-pinch)
+  - [Add Your Own Images](#add-your-own-images)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -69,14 +77,19 @@
 </div>
 <br/>
 
-#project_description
+A beautiful Image Gallery with Sorting and Drag and Drop Support.
+For full feature list, head over to the [Features](#features) section below.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 [![React][React]][React-url]  
-[![TailwindCSS][TailwindCSS]][Tailwind-url]
+[![TailwindCSS][TailwindCSS]][Tailwind-url]  
+[![HEADLESS UI](https://img.shields.io/badge/HEADLESS_UI-111827?style=for-the-badge&logo=headlessui&logoColor=%2366E3FF)](https://headlessui.com/)  
+[![REACT ICONS](https://img.shields.io/badge/REACT_ICONS-f4f5f7?style=for-the-badge&logo=react&logoColor=%23e91e63)](https://react-icons.github.io/react-icons)  
+[![DND KIT](https://img.shields.io/badge/DND_KIT-000000?style=for-the-badge&logo=dndkit&logoColor=%23FFFFFF)](https://dndkit.com/)  
+[![REACT ZOOM PAN PINCH](https://img.shields.io/badge/REACT_ZOOM_PAN_PINCH-ffffff?style=for-the-badge&logo=reactzoompanpinch&logoColor=%23111111)](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,11 +97,15 @@
 
 ## Getting Started
 
-🌐 The site is already live at: [https://webdevsk.github.io/Image-Gallery-DND/](https://webdevsk.github.io/Image-Gallery-DND/)
+🌐 The project is already live at: [https://webdevsk.github.io/Image-Gallery-DND/](https://webdevsk.github.io/Image-Gallery-DND/)
 
 OR
 
 🖥️ You can test it on your local machine by following the steps below.
+
+⭐ **Want to build a `Drag and Drop` only component from scratch? You can follow my own instructions here:**
+
+**( )=> [Quick Setup DND Kit](docs/Quick%20Setup.md)**
 
 ### Prerequisites
 
@@ -129,6 +146,63 @@ OR
 <!-- USAGE EXAMPLES -->
 
 ## Features
+
+### Featured Image
+
+- Built using CSS Grid layout. Fully responsive on all devices.
+- First image spans by 2 cells in both direction indicating a Featured Image.
+
+### Hover Overlay
+
+![Hover Overlay preview](github_assets/image-1.png)
+
+- Hover over an image to reveal an Overlay with action buttons.
+- useState hook allows each button to show up indivisually based on different scenarios.
+
+### Drag And Drop
+
+![Drag and Drop preview](github_assets/image.png)
+
+- Uses `dnd kit` library to allow drag and drop feature.
+- Supports `Pointer`, `Mouse`, `Touch` and `Keyboard` interactions for better accessibility.
+- Shows a `Duplicate element` that floats while dragging.
+- Shows a `Drop zone` with proper styling.
+- Animates on drop end.
+- `Sorts` the state variable based on drop source and target.
+- Animates on every `Sort` operations.
+
+### Set Featured
+
+- Overlay features a Set as Featured button.
+- Sorts the state variable array to move current item to the beginning.
+- Animates while being sorted.
+
+### Selection
+
+- Overlay features a Selection button.
+- Select/Mark, Unselect/Unmark items for deletion.
+- Gallery Header shows `Selected items count`, a `Batch Selection button` and `Delete button`.
+- Items are removed from State variable array upon deletion.
+
+### Image Box/Expand Image
+
+- Overlay features a Expand button.
+- Shows a `Dialogue` with the current image for a bigger view.
+- Button for closing the Dialogue. Clicking outside closes the dialogue as well.
+- Carefully setup Dialogue height and width for the Mobile support.
+
+### Zoom, Pan and Pinch
+
+- Uses `react-zoom-pan-pinch` library to allow expanded image to be interactive.
+- Supports `Mouse`, `Mouse Wheel` and `Touch` to effectively zoom, pan and pinch image.
+
+### Add Your Own Images
+
+- Press `Add Images` button to add your own.
+- File size validation:
+  - Upto 2MB (2048KB)
+- File format validation:
+  - Only allow types of file: image
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
